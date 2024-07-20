@@ -4,7 +4,7 @@ import DataBase from './database.js';
 const app = express();
 
 //Объект для работы с БД
-const DB = new DataBase(app);
+const DB = new DataBase();
 
 //Получение данных о самых популярных(наибольшее количество звёзд) репозиториях каждые 5 минут
 var cooldown = setInterval(async ()=>{
@@ -13,7 +13,7 @@ var cooldown = setInterval(async ()=>{
         const data = await query.data;
 
         //Добавить в базу данные о репозиториях
-        DB.add_many_repo(data);
+        DB.add_many_repo(data.items);
 
         console.log('Chart update.');
     } catch(error) {
@@ -36,7 +36,7 @@ app.get('/popular_repos', async (request, response)=>{
                 const data = await query.data;
 
                 //Добавить в базу данные о репозиториях
-                DB.add_many_repo(data);
+                DB.add_many_repo(data.items);
 
                 console.log('Chart update.');
             } catch(error) {
@@ -61,6 +61,9 @@ app.get('/repo', async (request, response)=>{
         const query = await axios.get(`https://api.github.com/repositories/${repo_id}`);
         const data = await query.data;
         
+        //Добавим в БД информацию о репозитории
+        DB.add_one_repo(data)
+
         response.json(data);
         console.log(`Get data from API GitHub about repo with id: ${data.id}`)
     } catch(error) {
@@ -80,6 +83,9 @@ app.get(`/repo/:username/:repo_name`, async (request, response)=>{
 
         const query = await axios.get(`https://api.github.com/repos/${username}/${repo_name}`);
         const data = await query.data;
+
+        //Добавим в БД информацию о репозитории
+        DB.add_one_repo(data)
 
         response.json(data);
         console.log(`Get data about repo with name: ${repo_name} and owner: ${username}`)
