@@ -30,7 +30,7 @@ export default class DataBase {
             //Во избежание дублирования в Mongo
             repo._id = repo.id;
             delete repo.id;
-            
+
             //Чтобы не выскакивало исключение
             const check_repo_info = await this.find_repos.findOne({_id : repo._id});
             if (check_repo_info) {
@@ -48,11 +48,24 @@ export default class DataBase {
     //Добавление множества репозиториев
     add_many_repo(repos) {
         if (typeof(repos) === 'object' && repos.length > 0) {
-            //Добавим в коллекцию самых популярных репозиториев
-            const res = this.most_popular_repos.insertMany(repos);
-            console.log(res);
-            console.log(repos);
-            console.log('Run please....run')
+            //Пройдёмся по колекции репозиториев
+            repos.forEach(async repo => {
+                //Во избежание дублирования в Mongo
+                repo._id = repo.id;
+                delete repo.id;
+
+                //Чтобы не выскакивало исключение
+                const check_repo_info = await this.most_popular_repos.findOne({_id : repo._id});
+                if (check_repo_info) {
+                    console.log('Primary key already exist...');    //Запись о данном репозитории существует
+                    return
+                }
+
+                //Добавим в коллекцию самых популярных репозиториев
+                const res = this.most_popular_repos.insertOne(repo);
+                console.log(res);
+                console.log(repo);
+            });
         }
     }
 
