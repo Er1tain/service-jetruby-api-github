@@ -4,13 +4,17 @@ import DataBase from './database.js';
 const app = express();
 
 //Объект для работы с БД
-const DB = new DataBase();
+const DB = new DataBase(app);
 
 //Получение данных о самых популярных(наибольшее количество звёзд) репозиториях каждые 5 минут
 var cooldown = setInterval(async ()=>{
     try {
         const query = await axios.get(`https://api.github.com/search/repositories?q=stars:>1&sort=stars&order=desc`);
         const data = await query.data;
+
+        //Добавить в базу данные о репозиториях
+        DB.add_many_repo(data);
+
         console.log('Chart update.');
     } catch(error) {
         console.log('Server not found...');
@@ -30,11 +34,18 @@ app.get('/popular_repos', async (request, response)=>{
             try {
                 const query = await axios.get(`https://api.github.com/search/repositories?q=stars:>1&sort=stars&order=desc`);
                 const data = await query.data;
+
+                //Добавить в базу данные о репозиториях
+                DB.add_many_repo(data);
+
                 console.log('Chart update.');
             } catch(error) {
                 console.log('Server not found...');
             }
         }, 5 * 60000);
+        
+        //Добавить в базу данные о репозиториях
+        DB.add_many_repo(data.items);
 
         console.log('Actually list of most popular repos!');
         response.json(data);
