@@ -1,6 +1,10 @@
-const { default: axios } = require('axios');
-const express = require('express');
+import axios from 'axios';
+import express from 'express';
+import DataBase from './database.js';
 const app = express();
+
+//Объект для работы с БД
+const DB = new DataBase();
 
 //Получение данных о самых популярных(наибольшее количество звёзд) репозиториях каждые 5 минут
 var cooldown = setInterval(async ()=>{
