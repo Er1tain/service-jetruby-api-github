@@ -1,5 +1,5 @@
 //Симмуляция работы с БД
-class DataBase {
+export default class DataBase {
     //Создание объекта для установки соединения с БД и начала работы с ней
     constructor(){
 
