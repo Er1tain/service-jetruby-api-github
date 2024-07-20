@@ -22,6 +22,7 @@ app.get('/repo', async (request, response)=>{
 //Эндпоинт для получения информации о репозитории по имени
 app.get(`/repo/:username/:repo_name`, async (request, response)=>{
    try {
+        //У разных пользователей могут быть репозитории с одинаковыми именами, следовательно необходима дополнительная информация(ник хозяина репозиторий)
         const username = request.params.username;
         const repo_name = request.params.repo_name;
 
