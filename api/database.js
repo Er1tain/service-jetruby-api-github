@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 //Симмуляция работы с БД
 export default class DataBase {
     //Создание объекта для установки соединения с БД и начала работы с ней
-    constructor(app){
+    constructor(){
         this.MongoDB = new MongoClient("mongodb://127.0.0.1:27017/");
 
         //Создадим объект коллекции куда будем добавлять документы, каждый такой документ представляет информацию о репозитории из списка популярных
@@ -12,7 +12,10 @@ export default class DataBase {
                 this.MongoDB.connect();
 
                 //Создадим поле класса для коллекции <Most_popular_repos>
-                this.most_popular_repos = this.MongoDB.db('database-api-github').collection('Most_popular_repos'); //app - экземпляр текущего приложения express.js ; Создали объект коллекции для хранения документов
+                this.most_popular_repos = this.MongoDB.db('database-api-github').collection('Most_popular_repos');
+                
+                //Создадим поле класса для коллекции <find_repos>
+                this.find_repos = this.MongoDB.db('database-api-github').collection('Find_repos');
 
             } catch (error) {
                 console.log("Database connect fail...\n" + error);
@@ -24,7 +27,10 @@ export default class DataBase {
     //Добавление в БД одного репозитория
     add_one_repo(repo) {
         if (typeof(repo) === 'object' && repo.length === undefined) {
-            
+            //Добавим в коллекцию ранее найденных репозиториев
+            const res = this.find_repos.insertOne(repo);
+            console.log(res);
+            console.log(repo);
         }
     }
 
