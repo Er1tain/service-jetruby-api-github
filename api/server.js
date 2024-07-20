@@ -19,4 +19,20 @@ app.get('/repo', async (request, response)=>{
     }
 })
 
+//Эндпоинт для получения информации о репозитории по имени
+app.get(`/repo/:username/:repo_name`, async (request, response)=>{
+   try {
+        const username = request.params.username;
+        const repo_name = request.params.repo_name;
+
+        const query = await axios.get(`https://api.github.com/repos/${username}/${repo_name}`);
+        const data = await query.data;
+
+        response.json(data);
+        console.log(`Get data about repo with name: ${repo_name} and owner: ${username}`)
+   } catch(error) {
+        console.log('Server disconnect or repo does not exist...')
+   }
+})
+
 app.listen(3001, ()=>console.log('Server run!'));
