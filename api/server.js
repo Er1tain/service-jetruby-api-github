@@ -2,6 +2,43 @@ const { default: axios } = require('axios');
 const express = require('express');
 const app = express();
 
+//Получение данных о самых популярных(наибольшее количество звёзд) репозиториях каждые 5 минут
+var cooldown = setInterval(async ()=>{
+    try {
+        const query = await axios.get(`https://api.github.com/search/repositories?q=stars:>1&sort=stars&order=desc`);
+        const data = await query.data;
+        console.log('Chart update.');
+    } catch(error) {
+        console.log('Server not found...');
+    }
+}, 5 * 60000);
+
+//Принудительное получение данных о самых популярных(наибольшее количество звёзд) репозиториях
+app.get('/popular_repos', async (request, response)=>{
+    try {
+        const query = await axios.get(`https://api.github.com/search/repositories?q=stars:>1&sort=stars&order=desc`);
+        const data = await query.data;
+
+        //Так как пользователь совершил принудительное обвновление данных, то запланированное выполнение коллбэка отменяется и вместо этого коллбэки
+        //Будут снова отрабатывать с интервалом в 5 минут до следующего принудительного запроса
+        clearInterval(cooldown);
+        cooldown = setInterval(async ()=>{
+            try {
+                const query = await axios.get(`https://api.github.com/search/repositories?q=stars:>1&sort=stars&order=desc`);
+                const data = await query.data;
+                console.log('Chart update.');
+            } catch(error) {
+                console.log('Server not found...');
+            }
+        }, 5 * 60000);
+
+        console.log('Actually list of most popular repos!');
+        response.json(data);
+    } catch {
+        console.log('Server disconnect or repo does not exist...');
+    }
+})
+
 //Эндпоинт для получения информации о репозитории по id
 app.get('/repo', async (request, response)=>{
     try {
