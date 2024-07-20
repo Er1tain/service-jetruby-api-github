@@ -25,8 +25,19 @@ export default class DataBase {
     }
     
     //Добавление в БД одного репозитория
-    add_one_repo(repo) {
+    async add_one_repo(repo) {
         if (typeof(repo) === 'object' && repo.length === undefined) {
+            //Во избежание дублирования в Mongo
+            repo._id = repo.id;
+            delete repo.id;
+            
+            //Чтобы не выскакивало исключение
+            const check_repo_info = await this.find_repos.findOne({_id : repo._id});
+            if (check_repo_info) {
+                console.log('Primary key already exist...');    //Запись о данном репозитории существует
+                return
+            }
+            
             //Добавим в коллекцию ранее найденных репозиториев
             const res = this.find_repos.insertOne(repo);
             console.log(res);
