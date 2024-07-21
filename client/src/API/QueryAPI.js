@@ -1,15 +1,26 @@
 import axios from "axios"
 
 export default class QueryAPI {
-    static get_popular_repos() {
-        
+    constructor(setState) {
+        //setState – функция, сохраняющая в состоянии данные с бэкенда
+        this.setState = setState;
     }
 
-    static get_repo_id() {
+    async get_popular_repos() {
+        try {
+            const query = await axios.get('http://localhost:3001/popular_repos');
+            const data = await query.data.items;
+            console.log(data);
+        } catch(err) {
+            console.log('Server not found...')
+        }
+    }
+
+    get_repo_id() {
 
     }
 
-    static get_repo_owner_reponame() {
+    get_repo_owner_reponame() {
 
     }
 }
