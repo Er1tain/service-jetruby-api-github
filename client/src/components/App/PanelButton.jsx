@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import '../../styles/App/PanelButton/animation.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function PanelButton() {
     const panel = useRef();
@@ -16,11 +17,13 @@ export default function PanelButton() {
       
     }, [])
 
+    const navigate = useNavigate();
+
     return (
         <div id="button_panel" ref={panel}>
-          <button class="button_panel_button" id="popular_repos" ref={popular_repos}>Данные о  <br></br>популярных репозиториях</button>
-          <button class="button_panel_button" id="get_repo_id" ref={get_repo_id}>Получить информацию <br></br>о репозитории по id</button>
-          <button class="button_panel_button" id="get_repo_owner_reponame" ref={get_repo_owner_reponame}>Получить информацию <br></br>о репозитории по нику владельца и названию</button>
+          <button class="button_panel_button" id="popular_repos" ref={popular_repos} onClick={()=>navigate('/popular_repos')}>Данные о  <br></br>популярных репозиториях</button>
+          <button class="button_panel_button" id="get_repo_id" ref={get_repo_id} onClick={()=>navigate('/repo_id')}>Получить информацию <br></br>о репозитории по id</button>
+          <button class="button_panel_button" id="get_repo_owner_reponame" ref={get_repo_owner_reponame} onClick={()=>navigate('/repo_name_owner')}>Получить информацию <br></br>о репозитории по нику владельца и названию</button>
         </div>
     )
 }
