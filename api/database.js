@@ -69,6 +69,7 @@ export default class DataBase {
         }
     }
 
+    /*Буду реализованы в будущем
     update_repo(repo_id) {
         if (typeof(repo_id) === 'string') {
 
@@ -85,7 +86,7 @@ export default class DataBase {
         if (typeof(repo_id) === 'string') {
 
         }
-    }
+    }*/
 
 
 }
