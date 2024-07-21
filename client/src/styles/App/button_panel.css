@@ -1,0 +1,15 @@
+#button_panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.button_panel_button {
+    font-family: 'Default';
+    font-size: 20px;
+    background-color: #3b4046;
+    color: white;
+    border: 0;
+    border-radius: 9px;
+}
