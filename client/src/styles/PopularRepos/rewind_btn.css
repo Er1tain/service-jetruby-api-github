@@ -1,0 +1,13 @@
+#rewind_btn {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+
+#rewind_btn button {
+    font-size: 25px;
+    font-family: 'GitFont';
+    border: 0;
+    border-radius: 8px;
+    background-color: rgb(252, 126, 252);
+}

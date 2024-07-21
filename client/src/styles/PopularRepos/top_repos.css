@@ -1,0 +1,11 @@
+#top-repos {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 20px;
+    background-color: aqua;
+    border-radius: 15px;
+}
+
+#top-repos div:not(:last-child) {
+    border-right: 1px solid black;
+}

@@ -8,4 +8,5 @@
     flex-direction: column;
     align-items: center;
     font-family: 'Default';
+    gap: 0.5rem;
 }
