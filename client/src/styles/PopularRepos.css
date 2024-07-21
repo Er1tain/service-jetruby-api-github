@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'GitFont';
+    src: url('../assets/fonts/COLLEGIA.ttf');
+}
+
+#Most_popular_repos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Default';
+}

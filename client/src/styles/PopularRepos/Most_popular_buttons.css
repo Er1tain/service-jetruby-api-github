@@ -1,0 +1,21 @@
+#Most_popular_buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+
+#Back_to_main {
+    background-color: rgb(144, 144, 250);
+    font-family: 'GitFont';
+    border: 0;
+    border-radius: 7px;
+    font-size: 20px;
+}
+
+#update_popular_repos {
+    background-color: rgb(71, 248, 100);
+    font-family: 'GitFont';
+    border: 0;
+    border-radius: 7px;
+    font-size: 20px;
+}
