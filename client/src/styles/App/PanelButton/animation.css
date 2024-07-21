@@ -1,0 +1,24 @@
+#button_panel {
+    height: 80vh;
+    opacity: 0;
+    transition: 2s;
+    
+}
+
+.button_panel_button {
+    height: max-content;
+    transition: 2s;
+}
+
+#popular_repos {
+   margin-right: 30rem;
+}
+
+#get_repo_id {
+    margin-top: 30rem;
+}
+
+#get_repo_owner_reponame {
+    margin-left: 30rem;
+    
+}
