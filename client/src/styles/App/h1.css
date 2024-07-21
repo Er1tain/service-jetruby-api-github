@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Default';
+    src: url('../../assets/fonts/COLLEGIA.ttf');
+}
+
+h1 {
+    font-family: 'Default';
+    font-size: 50px;
+}

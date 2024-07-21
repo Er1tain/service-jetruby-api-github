@@ -1,0 +1,8 @@
+header {
+    padding-top: 5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    gap: 2rem;
+}
