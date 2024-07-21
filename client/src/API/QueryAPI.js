@@ -1,4 +1,5 @@
 import axios from "axios"
+import handlingPopularRepos from "../Logic/handlingPopularRepos";
 
 export default class QueryAPI {
     constructor(setState) {
@@ -10,7 +11,9 @@ export default class QueryAPI {
         try {
             const query = await axios.get('http://localhost:3001/popular_repos');
             const data = await query.data.items;
-            console.log(data);
+            const popular_repos = handlingPopularRepos(data);
+            console.log(popular_repos);
+            this.setState(popular_repos);
         } catch(err) {
             console.log('Server not found...')
         }
