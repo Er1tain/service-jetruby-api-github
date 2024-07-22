@@ -1,7 +1,7 @@
 import QueryAPI from "../../../API/QueryAPI";
 import { useState, useEffect } from "react";
 export default function Modal({Visible, nick, reponame}) {
-    const [repo_info, getRepoInfo] = useState(); //{owner: string, reponame: string, link: string, stars: number}
+    const [repo_info, getRepoInfo] = useState(); //{owner: string, id_repo: string, reponame: string, link: string, stars: number}
 
     useEffect(()=>{
         const api = new QueryAPI(getRepoInfo);
@@ -18,6 +18,10 @@ export default function Modal({Visible, nick, reponame}) {
                                 <div className="payload" id="owner">
                                     <label>Владелец: </label>
                                     <p>{repo_info?.owner}</p>
+                                </div>
+                                <div className="payload" id="repo_id">
+                                    <label>ID репозитория: </label>
+                                    <p>{repo_info?.id_repo}</p>
                                 </div>
                                 <div className="payload" id="repo_name">
                                     <label>Имя репозитория: </label>
