@@ -7,17 +7,11 @@ export default function IDrepo() {
 
     const id_input = useRef();
 
-    useEffect(()=>{
-        if (visible) {
-            
-        }
-    }, [visible])
-
     return (
         <div id="IDrepo">
             {
                 visible && (
-                    <Modal Visible={Visible}/>
+                    <Modal Visible={Visible} repo_id={id_input.current.value}/>
                 )
             }
             <h1>Репозиторий по ID</h1>
