@@ -43,10 +43,12 @@ export default class QueryAPI {
             const data = await query.data;
             const repo_info = {
                 owner: data.owner.login,
+                id_repo: data._id,
                 reponame: data.name,
                 link: data.html_url,
                 stars: data.stargazers_count
             }
+            console.log(repo_info);
             this.setState(repo_info);
         } catch(err) {
             console.log('Server not found...')
