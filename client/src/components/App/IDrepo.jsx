@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/IDrepo.css';
 import Modal from './IDrepo/Modal';
 
@@ -7,6 +8,7 @@ export default function IDrepo() {
 
     const id_input = useRef();
 
+    const navigate = useNavigate();
     return (
         <div id="IDrepo">
             {
@@ -24,6 +26,7 @@ export default function IDrepo() {
                     e.preventDefault();
                     if (id_input.current.value != '') Visible(true)    
                 }}>Информация</button>
+                <button id="back_btn" onClick={()=>navigate('/')}>На главную</button>
             </form>
         </div>
     )
