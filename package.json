@@ -1,0 +1,17 @@
+{
+  "name": "jetruby",
+  "version": "1.0.0",
+  "description": "1. Проверка API GitHub каждые X минут и извлечение актуальных репозиториев.\r 2. Репозитории должны сохраняться в БД.\r 3. Сервис должен предоставлять публичный API с 3мя эндпоинтами:\r     <ul>\r         <li>\r             Получение репозитория по имени или id.\r         </li>\r         <li>\r             Получить все репозитории\r         </li>\r         <li>\r             Хранить информацию о самых популярных репозиториях и получать информацию о них.\r         </li>\r         <li>Синхронизация с API GitHub. В случае принудительной синхронизации таймер(см. 1 пункт) сбрасывается до 0.</li>\r     </ul>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run start-api\" \"npm run start-client\"",
+    "start-api": "cd api && npm start",
+    "start-client": "cd client && npm start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
