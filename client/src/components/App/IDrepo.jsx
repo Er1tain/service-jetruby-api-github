@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import '../../styles/IDrepo.css';
+import Modal from './IDrepo/Modal';
 
 export default function IDrepo() {
     const [visible, Visible] = useState(false);
@@ -16,27 +17,7 @@ export default function IDrepo() {
         <div id="IDrepo">
             {
                 visible && (
-                    <div id="container">
-                        <div id="content">
-                            <div id="close_btn" onClick={()=>Visible(false)}>
-                                <div id="image_crest"></div>
-                            </div>
-                            <div id="characters">
-                                <div id="owner">
-                                    <label>Владелец: </label>
-                                </div>
-                                <div id="repo_name">
-                                    <label>Имя репозитория: </label>
-                                </div>
-                                <div id="link">
-                                    <label>Ссылка: </label>
-                                </div>
-                                <div id="stars">
-                                    <labe>Кол-во звёзд: </labe>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
+                    <Modal Visible={Visible}/>
                 )
             }
             <h1>Репозиторий по ID</h1>
