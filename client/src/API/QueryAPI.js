@@ -37,7 +37,19 @@ export default class QueryAPI {
         }
     }
 
-    get_repo_owner_reponame() {
-
+    async get_repo_owner_reponame(nick, reponame) {
+        try {
+            const query = await axios.get(`http://localhost:3001/repo/${nick}/${reponame}`);
+            const data = await query.data;
+            const repo_info = {
+                owner: data.owner.login,
+                reponame: data.name,
+                link: data.html_url,
+                stars: data.stargazers_count
+            }
+            this.setState(repo_info);
+        } catch(err) {
+            console.log('Server not found...')
+        }
     }
 }
