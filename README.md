@@ -27,3 +27,8 @@
 3. Аналогично для ./client
 4. Запустить проект из корневой директории с помощью *npm start* и можно тестировать MVP
 P.S. В системе должно быть запущено: *mongodb://127.0.0.1:27017/*
+
+## Через docker-compose
+
+1. cd ./service-jetruby-api-github
+2. docker-compose up
