@@ -2,20 +2,32 @@ version: '3'
 
 services:
   api:
-    build: ./api
+    container_name: api
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
     ports:
       - "3001:3001"
+    networks:
+      - test_network
     depends_on:
       - db
     environment:
       - MONGO_URI: mongodb://db:27017/database-api-github
 
   client:
-    build: ./client
+    container_name: client
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
     ports:
       - "3000:3000"
-
+    networks:
+      - test_network
   db:
+    container_name: db
     image: mongo
     ports:
       - "27017:27017"
+    networks:
+      - test_network
